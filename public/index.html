@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        font-size: 14px;
+        background-color: black;
+        color: white;
+      }
+      button {
+        background-color: #212529;
+        border: none;
+        color: white;
+        margin: 5px;
+      }
+      span,
+      div {
+        color: white;
+      }
+      .container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List App</h1>
+      <div class="items"></div>
+      <input
+        type="text"
+        id="text"
+        class="item-input"
+        placeholder="Add an item..."
+      />
+      <button id="add" class="add-item">Add Item</button>
+    </div>
+    <script>
+      let state = [];
+
+      function renderItems() {
+        let itemsHTML = "";
+        state.forEach(function (item, i) {
+          itemsHTML += `
+          <div class="item">
+            <button onClick="deleteItem(${i})"class="item-delete">&times;</button>
+            <span class="item-text">${item}</span>
+            </div>`;
+        });
+
+        document.querySelector(".items").innerHTML = itemsHTML;
+      }
+
+      function deleteItem(index) {
+        state.splice(index, 1);
+        renderItems();
+      }
+
+      document
+        .querySelector(".add-item")
+        .addEventListener("click", function () {
+          console.log("");
+          let item = document.querySelector(".item-input");
+          state.push(item.value);
+          item.value = "";
+          renderItems();
+        });
+    </script>
+  </body>
+</html>
